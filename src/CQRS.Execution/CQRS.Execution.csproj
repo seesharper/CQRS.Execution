@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Packable>true</Packable>
+    <Authors>Bernhard Richter</Authors>
+    <Description>Contains DI independant implementations of the IQueryExecutor and ICommandExecutor.</Description>
+    <Copyright>Bernhard Richter</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/seesharper/CQRS.Concepts</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/seesharper/CQRS.Concepts</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>CQRS AspNetCore Dotnet</PackageTags>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CQRS.Command.Abstractions" Version="1.0.0" />
+    <PackageReference Include="CQRS.Query.Abstractions" Version="1.0.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

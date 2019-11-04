@@ -41,21 +41,30 @@ namespace CQRS.Execution
             Type queryHandlerType = typeof(IQueryHandler<,>).MakeGenericType(queryType, typeof(TResult));
 
             // Get the MethodInfo that represents the HandleAsync method.
-            MethodInfo method = queryHandlerType.GetMethod("HandleAsync");
+            MethodInfo handleAsyncMethod = queryHandlerType.GetMethod("HandleAsync");
 
             var queryHandlerFactoryParameter = Expression.Parameter(typeof(IQueryHandlerFactory));
-
-            var queryHandlerTypeConstant = Expression.Constant(queryHandlerType);
-
-            var getQueryHandlerMethodCallExpression = Expression.Call(queryHandlerFactoryParameter, GetQueryHandlerMethod, queryHandlerTypeConstant);
 
             var queryParameter = Expression.Parameter(typeof(IQuery<TResult>));
 
             var cancellationTokenParameterExpression = Expression.Parameter(typeof(CancellationToken));
 
-            var handleAsyncMethodCallExpression = Expression.Call(Expression.Convert(getQueryHandlerMethodCallExpression, queryHandlerType), method, Expression.Convert(queryParameter, queryType), cancellationTokenParameterExpression);
+            var queryHandlerTypeConstant = Expression.Constant(queryHandlerType);
 
-            var lambdaExpression = Expression.Lambda<Func<IQueryHandlerFactory, IQuery<TResult>, CancellationToken, Task<TResult>>>(handleAsyncMethodCallExpression, false, queryHandlerFactoryParameter, queryParameter, cancellationTokenParameterExpression);
+            var getQueryHandlerMethodCallExpression = Expression.Call(queryHandlerFactoryParameter, GetQueryHandlerMethod, queryHandlerTypeConstant);
+
+            var handleAsyncMethodCallExpression = Expression.Call(
+                    Expression.Convert(getQueryHandlerMethodCallExpression, queryHandlerType),
+                    handleAsyncMethod,
+                    Expression.Convert(queryParameter, queryType),
+                    cancellationTokenParameterExpression);
+
+            var lambdaExpression = Expression.Lambda<Func<IQueryHandlerFactory, IQuery<TResult>, CancellationToken, Task<TResult>>>(
+                    handleAsyncMethodCallExpression,
+                    true,
+                    queryHandlerFactoryParameter,
+                    queryParameter,
+                    cancellationTokenParameterExpression);
 
             return lambdaExpression.Compile();
         }

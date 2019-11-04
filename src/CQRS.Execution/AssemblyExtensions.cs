@@ -22,7 +22,7 @@ namespace CQRS.Execution
             var commandTypes =
                assembly
                     .GetTypes()
-                    .Select(t => GetGenericInterface(t, typeof(ICommandHandler<>)))
+                    .Select(t => GetHandlerDescriptor(t, typeof(ICommandHandler<>)))
                     .Where(m => m != null);
             return commandTypes.ToArray();
         }
@@ -37,23 +37,21 @@ namespace CQRS.Execution
             var commandTypes =
                assembly
                     .GetTypes()
-                    .Select(t => GetGenericInterface(t, typeof(IQueryHandler<,>)))
+                    .Select(t => GetHandlerDescriptor(t, typeof(IQueryHandler<,>)))
                     .Where(m => m != null);
             return commandTypes.ToArray();
         }
 
-        private static HandlerDescriptor GetGenericInterface(Type type, Type genericTypeDefinition)
+        private static HandlerDescriptor GetHandlerDescriptor(Type type, Type openGenericHandlerType)
         {
-            var closedGenericInterface =
-                type.GetInterfaces()
-                    .SingleOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == genericTypeDefinition);
+            var closedGenericInterface = type.GetInterfaces().SingleOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == openGenericHandlerType);
+
             if (closedGenericInterface != null)
             {
                 var constructor = type.GetConstructors().FirstOrDefault();
                 if (constructor != null)
                 {
-                    var isDecorator = constructor.GetParameters().Select(p => p.ParameterType)
-                        .Contains(closedGenericInterface);
+                    var isDecorator = constructor.GetParameters().Select(p => p.ParameterType).Contains(closedGenericInterface);
                     if (!isDecorator)
                     {
                         return new HandlerDescriptor(closedGenericInterface, type);

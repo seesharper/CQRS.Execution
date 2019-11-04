@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Packable>true</Packable>
     <Authors>Bernhard Richter</Authors>
-    <Description>Contains DI independant implementations of the IQueryExecutor and ICommandExecutor.</Description>
+    <Description>Contains the implementations of the IQueryExecutor and the ICommandExecutor interfaces.</Description>
     <Copyright>Bernhard Richter</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/seesharper/CQRS.Concepts</PackageProjectUrl>

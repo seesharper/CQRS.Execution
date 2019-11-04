@@ -1,5 +1,5 @@
 using System;
-using CQRS.Execution.Abstractions;
+using CQRS.Execution;
 
 namespace CQRS.Execution.Tests
 {

@@ -1,4 +1,4 @@
-namespace CQRS.Execution.Abstractions
+namespace CQRS.Execution
 {
     using CQRS.Command.Abstractions;
 

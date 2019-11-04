@@ -1,7 +1,7 @@
-namespace CQRS.Execution.Abstractions
+namespace CQRS.Execution
 {
     using System;
-    using CQRS.Query.Abstractions;
+    using CQRS.Query;
 
     /// <summary>
     /// Represents a class that is capable of

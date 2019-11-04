@@ -1,6 +1,4 @@
 using CQRS.Command.Abstractions;
-using CQRS.Execution.Abstractions;
-
 namespace CQRS.Execution.Tests
 {
     public class CommandHandlerFactory : ICommandHandlerFactory

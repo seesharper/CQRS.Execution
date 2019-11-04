@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using CQRS.Execution.Abstractions;
 using FluentAssertions;
 using Xunit;
 

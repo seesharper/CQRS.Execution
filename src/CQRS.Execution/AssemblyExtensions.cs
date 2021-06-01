@@ -21,7 +21,7 @@ namespace CQRS.Execution
         {
             var commandTypes =
                assembly
-                    .GetTypes()
+                    .GetTypes().Where(t => !t.IsAbstract)
                     .Select(t => GetHandlerDescriptor(t, typeof(ICommandHandler<>)))
                     .Where(m => m != null);
             return commandTypes.ToArray();
@@ -36,7 +36,7 @@ namespace CQRS.Execution
         {
             var commandTypes =
                assembly
-                    .GetTypes()
+                    .GetTypes().Where(t => !t.IsAbstract)
                     .Select(t => GetHandlerDescriptor(t, typeof(IQueryHandler<,>)))
                     .Where(m => m != null);
             return commandTypes.ToArray();

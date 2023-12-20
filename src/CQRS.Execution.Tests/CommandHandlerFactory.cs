@@ -5,7 +5,16 @@ namespace CQRS.Execution.Tests
     {
         public ICommandHandler<TCommand> CreateCommandHandler<TCommand>()
         {
-            return new SampleCommandHandler() as ICommandHandler<TCommand>;
+            if (typeof(TCommand) == typeof(SampleCommand))
+                return new SampleCommandHandler() as ICommandHandler<TCommand>;
+            else
+            {
+                var commandType = typeof(TCommand).GenericTypeArguments[0];
+                var scopedCommandHandlerType = typeof(ScopedCommandHandler<>).MakeGenericType(commandType);
+                var instance = System.Activator.CreateInstance(scopedCommandHandlerType, new CommandHandlerScopeFactory());
+                return instance as ICommandHandler<TCommand>;
+            }
+
         }
     }
 }

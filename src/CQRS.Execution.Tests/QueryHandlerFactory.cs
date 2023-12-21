@@ -11,10 +11,8 @@ namespace CQRS.Execution.Tests
             if (queryHandlerType == typeof(IQueryHandler<SampleQuery, SampleQueryResult>))
                 return new SampleQueryHandler();
 
-            // Create the ScopedQueryHandler<T> type
 
-
-            var scopedQueryHandlerType = typeof(ScopedQueryHandler<,>).MakeGenericType(typeof(SampleQuery), typeof(SampleQueryResult));
+            var scopedQueryHandlerType = typeof(ScopedQueryHandler<,>).MakeGenericType(typeof(ScopedQuery<SampleQueryResult>), typeof(SampleQueryResult));
             var instance = System.Activator.CreateInstance(scopedQueryHandlerType, new QueryHandlerScopeFactory());
             return instance;
         }

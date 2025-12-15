@@ -1,9 +1,9 @@
 namespace CQRS.Execution.Tests
 {
+    using AwesomeAssertions;
     using CQRS.Command.Abstractions;
     using CQRS.Execution;
     using CQRS.Query.Abstractions;
-    using FluentAssertions;
     using Xunit;
 
     public class AssemblyExtensionsTests

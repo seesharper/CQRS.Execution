@@ -21,4 +21,4 @@ namespace CQRS.Execution.Tests
     {
         public bool WasHandled { get; set; }
     }
-}
+} 

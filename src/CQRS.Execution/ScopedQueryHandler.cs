@@ -27,12 +27,12 @@ namespace CQRS.Execution
         /// <param name="query">The query to be executed.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>THe result from the query.</returns>
-        public Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken = default)
+        public async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken = default)
         {
             using (var scope = handlerScopeFactory.CreateScope())
             {
                 var queryExecutor = scope.CreateQueryExecutor();
-                return queryExecutor.ExecuteAsync(query.Query, cancellationToken);
+                return await queryExecutor.ExecuteAsync(query.Query, cancellationToken);
             }
         }
     }

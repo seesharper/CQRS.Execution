@@ -16,7 +16,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CQRS.Command.Abstractions" Version="1.0.0" />
+    <PackageReference Include="CQRS.Command.Abstractions" Version="1.2.0" />
     <PackageReference Include="CQRS.Query.Abstractions" Version="1.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

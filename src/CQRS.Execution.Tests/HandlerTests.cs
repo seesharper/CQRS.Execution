@@ -2,55 +2,54 @@ using System.Threading.Tasks;
 using AwesomeAssertions;
 using Xunit;
 
-namespace CQRS.Execution.Tests
+namespace CQRS.Execution.Tests;
+
+public class HandlerTests
 {
-    public class HandlerTests
+    [Fact]
+    public async Task ShouldExecuteCommandHandler()
     {
-        [Fact]
-        public async Task ShouldExecuteCommandHandler()
-        {
-            var commandExecutor = new CommandExecutor(new CommandHandlerFactory());
+        var commandExecutor = new CommandExecutor(new CommandHandlerFactory());
 
-            var command = new SampleCommand();
-            await commandExecutor.ExecuteAsync(command);
+        var command = new SampleCommand();
+        await commandExecutor.ExecuteAsync(command);
 
-            command.WasHandled.Should().BeTrue();
-        }
+        command.WasHandled.Should().BeTrue();
+    }
 
-        [Fact]
-        public async Task ShouldExecuteQueryHandler()
-        {
-            var queryExecutor = new QueryExecutor(new QueryHandlerFactory());
+    [Fact]
+    public async Task ShouldExecuteQueryHandler()
+    {
+        var queryExecutor = new QueryExecutor(new QueryHandlerFactory());
 
-            var query = new SampleQuery();
-            await queryExecutor.ExecuteAsync(query);
+        var query = new SampleQuery();
+        await queryExecutor.ExecuteAsync(query);
 
 
-            query.WasHandled.Should().BeTrue();
-        }
+        query.WasHandled.Should().BeTrue();
+    }
 
 
-        [Fact]
-        public async Task ShouldExecuteCommandHandlerInScope()
-        {
-            var commandExecutor = new CommandExecutor(new CommandHandlerFactory());
+    [Fact]
+    public async Task ShouldExecuteCommandHandlerInScope()
+    {
+        var commandExecutor = new CommandExecutor(new CommandHandlerFactory());
 
-            var command = new SampleCommand();
-            await commandExecutor.ExecuteScopedAsync(command);
+        var command = new SampleCommand();
+        await commandExecutor.ExecuteScopedAsync(command);
 
-            command.WasHandled.Should().BeTrue();
-        }
+        command.WasHandled.Should().BeTrue();
+    }
 
-        [Fact]
-        public async Task ShouldExecuteQueryHandlerInScope()
-        {
-            var queryExecutor = new QueryExecutor(new QueryHandlerFactory());
+    [Fact]
+    public async Task ShouldExecuteQueryHandlerInScope()
+    {
+        var queryExecutor = new QueryExecutor(new QueryHandlerFactory());
 
-            var query = new SampleQuery();
-            await queryExecutor.ExecuteScopedAsync(query);
+        var query = new SampleQuery();
+        await queryExecutor.ExecuteScopedAsync(query);
 
-            query.WasHandled.Should().BeTrue();
+        query.WasHandled.Should().BeTrue();
 
-        }
     }
 }

@@ -1,18 +1,16 @@
-namespace CQRS.Execution
-{
-    using System;
-    using CQRS.Command.Abstractions;
-    using CQRS.Query.Abstractions;
+namespace CQRS.Execution;
 
+using System;
+using CQRS.Query.Abstractions;
+
+/// <summary>
+/// Represents a scope for a handler.
+/// </summary>
+public interface IQueryHandlerScope : IAsyncDisposable
+{
     /// <summary>
-    /// Represents a scope for a handler.
+    /// Creates a query executor.
     /// </summary>
-    public interface IQueryHandlerScope : IDisposable
-    {
-        /// <summary>
-        /// Creates a command executor.
-        /// </summary>
-        /// <returns>The <see cref="ICommandExecutor"/> used to execute the command.</returns>
-        IQueryExecutor CreateQueryExecutor();
-    }
+    /// <returns>The <see cref="IQueryExecutor"/> used to execute the query.</returns>
+    IQueryExecutor CreateQueryExecutor();
 }

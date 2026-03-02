@@ -2,23 +2,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using CQRS.Query.Abstractions;
 
-namespace CQRS.Execution.Tests
+namespace CQRS.Execution.Tests;
+
+public class SampleQueryHandler : IQueryHandler<SampleQuery, SampleQueryResult>
 {
-    public class SampleQueryHandler : IQueryHandler<SampleQuery, SampleQueryResult>
+    public Task<SampleQueryResult> HandleAsync(SampleQuery query, CancellationToken cancellationToken = default)
     {
-        public Task<SampleQueryResult> HandleAsync(SampleQuery query, CancellationToken cancellationToken = default)
-        {
-            query.WasHandled = true;
-            return Task.FromResult(new SampleQueryResult());
-        }
+        query.WasHandled = true;
+        return Task.FromResult(new SampleQueryResult());
     }
+}
 
-    public class SampleQueryResult
-    {
-    }
+public class SampleQueryResult
+{
+}
 
-    public class SampleQuery : IQuery<SampleQueryResult>
-    {
-        public bool WasHandled { get; set; }
-    }
-} 
+public class SampleQuery : IQuery<SampleQueryResult>
+{
+    public bool WasHandled { get; set; }
+}

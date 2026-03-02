@@ -1,10 +1,11 @@
-namespace CQRS.Execution.Tests
+using System.Threading.Tasks;
+
+namespace CQRS.Execution.Tests;
+
+public class CommandHandlerScopeFactory : ICommandHandlerScopeFactory
 {
-    public class CommandHandlerScopeFactory : ICommandHandlerScopeFactory
+    public ValueTask<ICommandHandlerScope> CreateScopeAsync()
     {
-        public ICommandHandlerScope CreateScope()
-        {
-            return new CommandHandlerScope();
-        }
+        return ValueTask.FromResult<ICommandHandlerScope>(new CommandHandlerScope());
     }
 }

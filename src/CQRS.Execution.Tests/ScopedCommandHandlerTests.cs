@@ -1,7 +1,6 @@
-namespace CQRS.Execution.Tests
+namespace CQRS.Execution.Tests;
+
+public class ScopedCommandHandlerTests
 {
-    public class ScopedCommandHandlerTests
-    {
-        
-    }
+    
 }

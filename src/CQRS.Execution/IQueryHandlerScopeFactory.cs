@@ -1,14 +1,15 @@
-namespace CQRS.Execution
+namespace CQRS.Execution;
+
+using System.Threading.Tasks;
+
+/// <summary>
+/// Represents a factory for creating an <see cref="IQueryHandlerScope"/>.
+/// </summary>
+public interface IQueryHandlerScopeFactory
 {
     /// <summary>
-    /// Represents a factory for creating an <see cref="ICommandHandlerScope"/>.
+    /// Creates a new <see cref="IQueryHandlerScope"/>.
     /// </summary>
-    public interface IQueryHandlerScopeFactory
-    {
-        /// <summary>
-        /// Creates a new <see cref="ICommandHandlerScope"/>.
-        /// </summary>
-        /// <returns><see cref="ICommandHandlerScope"/> instance.</returns>
-        IQueryHandlerScope CreateScope();
-    }
+    /// <returns><see cref="IQueryHandlerScope"/> instance.</returns>
+    ValueTask<IQueryHandlerScope> CreateScopeAsync();
 }
